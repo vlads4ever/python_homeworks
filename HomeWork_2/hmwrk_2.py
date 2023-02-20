@@ -29,12 +29,12 @@ if discriminant > 0:
     x = (s - discriminant ** 0.5) / 2   
     y = s - x
     if x == int(x) and y == int(y):
-        print (f'{x} и {y}')
+        print (int(x), int(y))
     else:
         print('Таких натуральных чисел быть не может')
 elif discriminant == 0:
     x = s / 2
     y = s - x
-    print (f'{x} и {y}')
+    print (int(x), int(y))
 else:
     print('Таких чисел быть не может')
