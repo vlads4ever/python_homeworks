@@ -7,12 +7,13 @@
 1 2 3 4 5
 6
 -> 5 """
+from random import randint
 
 n = int(input())
 
 array = list()
 for i in range(n):
-    array.append(i)
+    array.append(randint(-9, 9))
     print(f'{array[i]} ', end = '')
 
 print()
