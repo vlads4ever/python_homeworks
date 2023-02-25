@@ -9,16 +9,21 @@
 
 from random import randint
 
-n = int(input())
+n = int(input('Введите N: '))
 
 array = list()
 for i in range(n):
     array.append(randint(0, 9))
-    print(f'{array[i]} ', end = '')
+    print(f'{array[i]} ', end='')
 
 print()
-x = int(input())
+x = int(input('Введите X: '))
 
+# Вариант с методом count()
+count = array.count(x)
+print(count)
+
+# Вариант с циклом
 count = 0
 for i in range(n):
     if x == array[i]:
