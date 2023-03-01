@@ -25,3 +25,7 @@ for i in range(1, len(array)):
         nearest_index = i
 
 print(array[nearest_index])
+
+# Вариант от учителя через второй массив разниц
+diff_array = [abs(x-i) for i in array]
+print(array[array.index(min(diff_array))])
