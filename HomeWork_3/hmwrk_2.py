@@ -33,7 +33,7 @@ print(array[array.index(min(diff_array))])
 ###############################################################
 # Вариант для массива целых чисел (отрицательные включительно)
 
-from random import randint
+""" from random import randint
 
 n = int(input())
 
@@ -62,4 +62,4 @@ for i in range(1, n):
         diff = current_diff
         diff_index = i
 
-print(array[diff_index])
+print(array[diff_index]) """
