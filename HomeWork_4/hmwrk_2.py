@@ -39,3 +39,18 @@ for i in range(count):
         max_bushes = current_bushes
 
 print(max_bushes)
+
+#########################################################
+# Эталонный алгоритм (если изменится количество одновременно 
+# обрабатываемых кустов - работать не будет.
+arr_count = list()
+for i in range(len(garden_bed) - 1):
+    arr_count.append(garden_bed[i - 1] +
+                     garden_bed[i] +
+                     garden_bed[i + 1])
+
+arr_count.append(garden_bed[-2] +
+                 garden_bed[-1] +
+                 garden_bed[0])
+
+print(max(arr_count))
