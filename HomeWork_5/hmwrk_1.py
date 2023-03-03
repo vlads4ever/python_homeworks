@@ -5,14 +5,14 @@ A = 3; B = 5 -> 243 (3⁵)
 A = 2; B = 3 -> 8 """
 
 
-def myPow(a: int, b: int) -> int:
+def my_pow(a: int, b: int) -> int:
     if b == 1:
         return a
     else:
-        return a * myPow(a, b - 1)
+        return a * my_pow(a, b - 1)
 
 
 a = int(input('Введите A: '))
 b = int(input('Введите B: '))
 
-print(myPow(a, b))
+print(my_pow(a, b))

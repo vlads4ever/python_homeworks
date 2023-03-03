@@ -6,13 +6,13 @@
 4 """
 
 
-def mySum(a: int, b: int) -> int:
+def my_sum(a: int, b: int) -> int:
     if b == 0:
         return a
-    return mySum(a+1, b-1)
+    return my_sum(a+1, b-1)
 
 
 a = int(input('Введите A: '))
 b = int(input('Введите B: '))
 
-print(mySum(a, b))
+print(my_sum(a, b))
