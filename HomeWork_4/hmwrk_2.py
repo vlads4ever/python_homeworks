@@ -33,7 +33,7 @@ for i in range(count):
         current_bushes = sum(garden_bed[i:i + together])
     else:
         current_bushes = (
-                         sum(garden_bed[:3 - (count - i)]) +
+                         sum(garden_bed[:together - (count - i)]) +
                          sum(garden_bed[i:]))
     if max_bushes < current_bushes:
         max_bushes = current_bushes
