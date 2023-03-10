@@ -17,12 +17,12 @@
 
 
 def vowels_count(phrase):
+    vowels = {'у', 'е', 'ы', 'а', 'о', 'э', 'я', 'и', 'ю'}
     return len(list(filter(lambda letter: letter.lower() in vowels, phrase)))
 
 
 screamer = input('Введите кричалку: ')
 
-vowels = {'у', 'е', 'ы', 'а', 'о', 'э', 'я', 'и', 'ю'}
 if len(set(map(vowels_count, screamer.split()))) == 1:
     print('Парам пам-пам')
 else:
