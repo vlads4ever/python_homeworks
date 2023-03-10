@@ -25,16 +25,14 @@
 #     print('Пам парам')
 
 
-def vowels_list(phrase):
-    res = list(filter(lambda letter: letter.lower() in vowels, phrase))
-    return res
+def vowels_count(phrase):
+    return len(list(filter(lambda letter: letter.lower() in vowels, phrase)))
 
 
-screamer = 'пУра-ра-рам рем-пем-папам па-ра-па-дам'
+screamer = input('Введите кричалку: ')
+
 vowels = {'у', 'е', 'ы', 'а', 'о', 'э', 'я', 'и', 'ю'}
-phrase_list = list(screamer.split())
-rhythm_set = set(map(lambda phrase: len(vowels_list(phrase)), phrase_list))
-if len(rhythm_set) == 1:
+if len(set(map(vowels_count, screamer.split()))) == 1:
     print('Парам пам-пам')
 else:
     print('Пам парам')
