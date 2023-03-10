@@ -10,13 +10,10 @@
 from random import randint as rnd
 
 
-def get_range_index(
-        arr: list[int], lower_lim: int, upper_lim: int) -> list[int]:
-    output_list = list()
-    for i in range(len(arr)):
-        if lower_lim <= arr[i] <= upper_lim:
-            output_list.append(i)
-    return output_list
+def get_range_index(num_lst: list[int],
+                    min_num: int,
+                    max_num: int) -> list[int]:
+    return [i for i, v in enumerate(num_lst) if min_num <= v <= max_num]
 
 
 def get_random_list(count: int, lower_lim: int, upper_lim: int) -> list[int]:

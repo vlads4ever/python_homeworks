@@ -7,14 +7,11 @@
 # Вывод: 7 9 11 13 15
 
 
-def get_arithmetic_progression(param: list[int]) -> list[int]:
-    output_list = list()
+def get_arithmetic_progression(param: list[int]) -> list[int]:    
     first_el = param[0]
     diff = param[1]
-    count = param[2]
-    for i in range(count):
-        output_list.append(first_el + i * diff)
-    return output_list
+    count = param[2]    
+    return [first_el + i * diff for i in range(count)]
 
 
 user_input = list(map(int, input(

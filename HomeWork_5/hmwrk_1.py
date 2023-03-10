@@ -6,7 +6,9 @@ A = 2; B = 3 -> 8 """
 
 
 def my_pow(a: int, b: int) -> int:
-    if b == 1:
+    if (a == 0 and b == 0) or a == 1:
+        return 1
+    elif b == 1:
         return a
     else:
         return a * my_pow(a, b - 1)
