@@ -16,15 +16,6 @@
 # Парам пам-пам
 
 
-# any_rhythm = lambda screamer, vowels: len(set(map(lambda phrase: len(
-#    list(filter(lambda letter: letter in vowels, phrase))), list(
-#       screamer.split())))) == 1
-# if any_rhythm(screamer, vowels):
-#     print('Парам пам-пам')
-# else:
-#     print('Пам парам')
-
-
 def vowels_count(phrase):
     return len(list(filter(lambda letter: letter.lower() in vowels, phrase)))
 
