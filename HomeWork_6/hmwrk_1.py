@@ -10,7 +10,7 @@
 def get_arithmetic_progression(param: list[int]) -> list[int]:    
     first_el = param[0]
     diff = param[1]
-    count = param[2]    
+    count = param[2]
     return [first_el + i * diff for i in range(count)]
 
 
