@@ -22,65 +22,102 @@
 
 
 def print_help():
-    print('"exit" - Выход из программы.')
-    print('"help" - Отображение справки по командам.')
-    print('"add ФИО телефон" - Добавление новой записи.')
-    print('"show" - Вывод всех записей.')
-    print('"find Фамилию или Имя" - Вывод указанной записи.')
-    print('"change Фамилию или Имя" - Изменение указанной записи.')
-    print('"delete Фамилию или Имя" - Удаление указанной записи.')
+    print('"exit" - для выхода из программы.')
+    print('"help" - для отображения справки по командам.')
+    print('"add ФИО телефон" - для добавления новой записи.')
+    print('"show" - для вывода всех записей.')
+    print('"find Фамилию или Имя" - для вывода указанной записи.')
+    print('"change Фамилию или Имя" - для изменения указанной записи.')
+    print('"delete Фамилию или Имя" - для удаления указанной записи.')
 
 
 def add_new_rec(u_input: tuple) -> str:
     with open('file.txt', 'a', encoding='utf-8') as file:
-        file.write(f"{u_input[1]};{u_input[2]};{u_input[3]};{u_input[4]}\n")
+        file.write(';'.join(u_input) + '\n')
     return 'Запись добавлена'
 
 
-def show_rec():
+def show_rec() -> str:
     with open('file.txt', 'r', encoding='utf-8') as file:
-        for line in file:
-            print(str(line.replace(';', ' ')))
+        return file.read().replace(';', ' ')
 
 
-def find_rec(user_search: str) -> str:
+def find_rec(user_search: str) -> list:
+    result = list()
     with open('file.txt', 'r', encoding='utf-8') as file:
         for line in file:
             if user_search.lower() in line.lower():
-                return str(line.replace(';', ' '))
-        return ('Запись отсутствует.')
+                result.append(line.replace(';', ' ').rstrip())
+    return result
 
 
 def delete_rec(user_delete: str) -> str:
-    message = 'Запись не обнаружена.'
-    with open('file.txt', 'r+', encoding='utf-8') as file:
-        lines = file.readlines()
-        file.seek(0)  # Для записи с начала документа
+    find_list = find_rec(user_delete)
+    if len(find_list) == 0:
+        return 'Запись не найдена.'
+    else:
+        print('Найдены записи: ')
+        print_list(find_list)
+
+        with open('file.txt', 'r', encoding='utf-8') as file:
+            lines = file.readlines()
+
+        temp_data = ''
         for line in lines:
             if user_delete.lower() not in line.lower():
-                file.write(line)
+                temp_data += line
             else:
-                message = 'Запись удалена.'
-        file.truncate()  # Усечение остатка файла с текущей позиции курсора
-    return message
+                print(f"Текущая запись: {line.replace(';', ' ')}")
+                u_inp = input('Подтвердите удаление (y/n) > ')
+                if u_inp.lower() == 'n':
+                    temp_data += line
+                    message = 'Запись не была удалена.'
+                else:
+                    message = 'Запись удалена.'
+
+        with open('file.txt', 'w', encoding='utf-8') as file:
+            file.write(temp_data)
+
+        return message
 
 
 def change_rec(user_change: str) -> str:
-    message = 'Запись не найдена.'
-    with open('file.txt', 'r+', encoding='utf-8') as file:
-        lines = file.readlines()
-        file.seek(0)
-        for line in lines:
-            if user_change.lower() not in line.lower():
-                file.write(line)
-            else:
-                print(f"Найдена запись: {str(line.replace(';', ' '))}")
-                print('Введите измененную строку:')
-                u_inp = tuple(input('New Record > ').split())
-                file.write(f"{u_inp[0]};{u_inp[1]};{u_inp[2]};{u_inp[3]}\n")
-                message = 'Запись изменена.'
-        file.truncate()
-    return message
+    find_list = find_rec(user_change)
+    if len(find_list) == 0:
+        return 'Запись не найдена.'
+    else:
+        print('Найдены записи: ')
+        print_list(find_list)
+
+        with open('file.txt', 'r', encoding='utf-8') as file:
+            lines = file.readlines()
+
+            temp_data = ''
+            for line in lines:
+                if user_change.lower() not in line.lower():
+                    temp_data += line
+                else:
+                    print(f"Текущая запись: {line.replace(';', ' ')}")
+                    print(
+                        'Введите изменения или Enter - оставить без изменений:'
+                        )
+                    u_inp = tuple(input('New Record > ').split())
+                    if len(u_inp) == 0:
+                        temp_data += line
+                        message = 'Запись оставлена без изменений'
+                    else:
+                        temp_data += ';'.join(u_inp) + '\n'
+                        message = 'Запись изменена.'
+
+            with open('file.txt', 'w', encoding='utf-8') as file:
+                file.write(temp_data)
+
+            return message
+
+
+def print_list(user_list):
+    for i in user_list:
+        print(i)
 
 
 print_help()
@@ -93,11 +130,15 @@ while True:
     elif tuple_input[0] == 'help':
         print_help()
     elif tuple_input[0] == 'add':
-        print(add_new_rec(tuple_input))
+        print(add_new_rec(tuple_input[1:]))
     elif tuple_input[0] == 'show':
-        show_rec()
+        print(show_rec())
     elif tuple_input[0] == 'find':
-        print(find_rec(tuple_input[1]))
+        result = find_rec(tuple_input[1])
+        if len(result) == 0:
+            print('Запись не найдена.')
+        else:
+            print_list(result)
     elif tuple_input[0] == 'delete':
         print(delete_rec(tuple_input[1]))
     elif tuple_input[0] == 'change':
